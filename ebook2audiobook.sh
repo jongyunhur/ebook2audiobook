@@ -16,8 +16,8 @@ export TTS_CACHE="./models"
 
 ARGS=("$@")
 
-declare -A arguments
-declare -A programs_missing
+declare -A arguments # associative array
+declare -a programs_missing # indexed array
 
 # Parse arguments
 while [[ "$#" -gt 0 ]]; do
@@ -48,7 +48,7 @@ SCRIPT_MODE="$NATIVE"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 WGET=$(which wget 2>/dev/null)
-REQUIRED_PROGRAMS=("calibre" "ffmpeg" "nodejs" "mecab" "espeak-ng" "rust")
+REQUIRED_PROGRAMS=("calibre" "ffmpeg" "nodejs" "mecab" "espeak-ng" "rust" "sox")
 PYTHON_ENV="python_env"
 CURRENT_ENV=""
 
@@ -110,6 +110,11 @@ else
 		echo -e "conda deactivate"
 		exit 1
 	fi
+	
+	# Check if .cache folder exists inside the eb2ab folder for Miniforge3
+	if [[ ! -d .cache ]]; then
+		mkdir .cache
+	fi
 
 	function required_programs_check {
 		local programs=("$@")
@@ -125,8 +130,8 @@ else
 				bin="$program"
 			fi
 			if ! command -v "$bin" >/dev/null 2>&1; then
-				echo -e "\e[33m$bin is not installed.\e[0m"
-				programs_missing+=($program)
+				echo -e "\e[33m$program is not installed.\e[0m"
+				programs_missing+=("$program")
 			fi
 		done
 		local count=${#programs_missing[@]}
@@ -157,30 +162,30 @@ else
 			echo -e "\e[33mInstalling required programs. NOTE: you must have 'sudo' priviliges to install ebook2audiobook.\e[0m"
 			PACK_MGR_OPTIONS=""
 			if command -v emerge &> /dev/null; then
-				PACK_MGR="$SUDO emerge"
+				PACK_MGR="emerge"
 				mecab_extra="app-text/mecab app-text/mecab-ipadic"
 			elif command -v dnf &> /dev/null; then
-				PACK_MGR="$SUDO dnf install"
+				PACK_MGR="dnf install"
 				PACK_MGR_OPTIONS="-y"
 				mecab_extra="mecab-devel mecab-ipadic"
 			elif command -v yum &> /dev/null; then
-				PACK_MGR="$SUDO yum install"
+				PACK_MGR="yum install"
 				PACK_MGR_OPTIONS="-y"
 				mecab_extra="mecab-devel mecab-ipadic"
 			elif command -v zypper &> /dev/null; then
-				PACK_MGR="$SUDO zypper install"
+				PACK_MGR="zypper install"
 				PACK_MGR_OPTIONS="-y"
 				mecab_extra="mecab-devel mecab-ipadic"
 			elif command -v pacman &> /dev/null; then
-				PACK_MGR="$SUDO pacman -Sy"
+				PACK_MGR="pacman -Sy"
 				mecab_extra="mecab-devel mecab-ipadic"
 			elif command -v apt-get &> /dev/null; then
 				$SUDO apt-get update
-				PACK_MGR="$SUDO apt-get install"
+				PACK_MGR="apt-get install"
 				PACK_MGR_OPTIONS="-y"
 				mecab_extra="libmecab-dev mecab-ipadic-utf8"
 			elif command -v apk &> /dev/null; then
-				PACK_MGR="$SUDO apk add"
+				PACK_MGR="apk add"
 				mecab_extra="mecab-dev mecab-ipadic"
 			else
 				echo "Cannot recognize your applications package manager. Please install the required applications manually."
@@ -232,11 +237,13 @@ else
 				fi		
 			elif [ "$program" = "rust" ]; then
 				if command -v apt-get &> /dev/null; then
-					program="rustc"
+					app="rustc"
+				else
+					app="$program"
 				fi
 				curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 				source $HOME/.cargo/env
-				if command -v $program &>/dev/null; then
+				if command -v $app &>/dev/null; then
 					echo -e "\e[32m===============>>> $program is installed! <<===============\e[0m"
 				else
 					echo "$program installation failed."
@@ -252,6 +259,8 @@ else
 		done
 		if required_programs_check "${REQUIRED_PROGRAMS[@]}"; then
 			return 0
+		else
+			echo "Some programs didn't install successfuly, please report the log to the support"
 		fi
 	}
 
@@ -297,15 +306,20 @@ else
 			conda activate "$SCRIPT_DIR/$PYTHON_ENV"
 			python -m pip install --upgrade pip
 			python -m pip install --upgrade --no-cache-dir --progress-bar=on < requirements.txt
-			# Prevent coqui-tts "dot" bug
-			coqui_path="$(pip show coqui-tts 2>/dev/null | grep "Location" | awk '{print $2}')"
-			if [ ! -z "$coqui_path" ]; then
-				cp -a ./patches/tokenizer.py $coqui_path/TTS/tts/layers/xtts/tokenizer.py
-			fi
 			conda deactivate
 		fi
 		return 0
 	}
+
+	# Prevent Coqui-TTS "dot" bug
+	coqui_path="$(pip show coqui-tts 2>/dev/null | grep "Location" | awk '{print $2}')"
+	if [ ! -z "$coqui_path" ]; then
+		src="./patches/tokenizer.py"
+		dest="$coqui_path/TTS/tts/layers/xtts/tokenizer.py"
+		if ! diff -q "$src" "$dest" > /dev/null 2>&1; then
+			$(which cp 2>/dev/null) -a "$src" "$dest"
+		fi
+	fi
 
 	echo -e "\e[33m v${VERSION} ${SCRIPT_MODE} mode \e[0m"
 	if [ "$SCRIPT_MODE" = "$FULL_DOCKER" ]; then
