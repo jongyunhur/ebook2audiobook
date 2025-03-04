@@ -29,6 +29,7 @@ Thanks to support ebook2audiobook developers!<br>
 - eng [English](README.md)
 - swe [Svenska (Swedish)](./readme/README_SWE.md)
 - fas [فارسی (Persian)](./readme/README_FA.md)
+- kor [한국어 (Korean)](./readme/README_KR.md)
 - ita [Italiano (Italian)](./readme/README.it.md)
 
 
@@ -100,8 +101,8 @@ Thanks to support ebook2audiobook developers!<br>
 ##  Hardware Requirements
 - 4gb RAM minimum, 8GB recommended
 - Virtualization enabled if running on windows (Docker only)
-- CPU (intel, AMD, ARM), GPU (Nvidia, AMD*, Intel*) (Recommended), MPS (Apple Silicon CPU)
-*available very soon
+- CPU, GPU (Recommended), MPS (Not yt optimized and can be slower than CPU) compatible
+
 
 > [!IMPORTANT]
 **Before to post an install or bug issue search carefully to the opened and closed issues TAB<br>

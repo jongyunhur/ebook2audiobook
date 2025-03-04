@@ -29,8 +29,9 @@ ebook2audiobook 개발을 지원해 주세요!<br>
 - eng [English](README.md)
 - swe [Svenska (Swedish)](./readme/README_SWE.md)
 - fas [فارسی (Persian)](./readme/README_FA.md)
-- ita [Italiano (Italian)](./readme/README.it.md)
 - kor [한국어 (Korean)](./readme/README_KR.md)
+- ita [Italiano (Italian)](./readme/README.it.md)
+
 
 
 ## 목차
