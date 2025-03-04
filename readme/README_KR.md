@@ -391,8 +391,7 @@ docker run --rm athomasson2/ebook2audiobook --help
 ## 일반적인 Docker Issues 해결
 
 - `python: can't open file '/home/user/app/app.py': [Errno 2] No such file or directory` 
-해결 방법:
-추가 인수를 제거하세요.<br>Dockerfile에서 `CMD`를 `ENTRYPOINT`로 변경했기 때문입니다.
+<br>해결 방법: 추가 인수를 제거하세요. Dockerfile에서 `CMD`를 `ENTRYPOINT`로 변경했기 때문입니다.
   - 예시 (잘못된 명령어):
   ```bash
   docker run athomasson2/ebook2audiobook app.py --script_mode full_docker
