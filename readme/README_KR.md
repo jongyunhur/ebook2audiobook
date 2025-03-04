@@ -406,7 +406,7 @@ docker run --rm athomasson2/ebook2audiobook --help
   ```
 
 - Docker가 Fine-Tuned 모델 다운로드 중 멈춤
-  일부 시스템에서 발생하는 문제이며, 진행률 표시줄을 비활성화하면 해결될 수 있습니다.
+  <br>일부 시스템에서 발생하는 문제이며, 진행률 표시줄을 비활성화하면 해결될 수 있습니다.
   [GitHub Issue #191](https://github.com/DrewThomasson/ebook2audiobook/issues/191)에서 논의된 해결 방법을 참고하세요.
   해결 방법:
   Example of adding this fix in the `docker run` command
