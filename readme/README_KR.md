@@ -40,32 +40,32 @@ ebook2audiobook 개발을 지원해 주세요!<br>
 - [Docker GUI 인터페이스](#Docker-GUI-인터페이스)
 - [Huggingface Space 데모](#Huggingface-Space-데모)
 - [무료 Google Colab](#무료-Google-Colab)
-- [미리 제작된 오디오 데모](#demos)
-- [지원 언어](#supported-languages)
-- [시스템 요구 사항](#hardware-requirements)
-- [설치 방법](#installation-instructions)
-- [사용법](#launching-gradio-web-interface)
-  - [Gradio 웹 인터페이스 실행](#launching-gradio-web-interface)
-  - [기본 Headless 사용법](#basic--usage)
-  - [Headless Custom XTTS Model Usage](#example-of-custom-model-zip-upload)
-  - [GPU 대여](#renting-a-gpu)
+- [미리 제작된 오디오 데모](#데모)
+- [지원 언어](#지원-언어)
+- [시스템 요구 사항](#시스템-요구-사항)
+- [설치 방법](#설치-방법)
+- [사용법](#Gradio-웹-인터페이스-실행)
+  - [Gradio 웹 인터페이스 실행](#Gradio-웹-인터페이스-실행)
+  - [기본 Headless 사용법](#기본-사용법)
+  - [Headless Custom XTTS Model Usage](#사용자-지정-모델-ZIP-업로드-예시)
+  - [GPU 대여](#GPU-대여)
   - [도움말 명령 출력](#help-command-output)
-- [Fine-Tuned TTS 모델](#fine-tuned-tts-models)
-  - [Fine-Tuned TTS 모델 모음](#fine-tuned-tts-collection)
-- [Docker 사용하기](#using-docker)
-  - [Docker 실행](#running-the-docker-container)
-  - [Docker 빌드](#building-the-docker-container)
+- [Fine-Tuned TTS 모델](#Fine-Tuned-TTS-모델)
+  - [Fine-Tuned TTS 모델 모음](#Fine-Tuned-TTS-모델-컬렉션)
+- [Docker 사용하기](#Docker-사용하기)
+  - [Docker 실행](#Docker-컨테이너-실행)
+  - [Docker 빌드](#Docker-컨테이너-빌드)
   - [Docker Compose](#docker-compose)
-  - [Headless Docker 가이드](#docker-headless-guide)
-  - [Docker 컨테이너 파일 위치](#docker-container-file-locations)
+  - [Headless Docker 가이드](#Headless-Docker-가이드)
+  - [Docker 컨테이너 파일 위치](#Docker-컨테이너-파일-위치)
   - [일반적인 Docker Issues 해결](#일반적인-Docker-Issues-해결)
-- [지원되는 eBook 형식](#supported-ebook-formats)
-- [출력](#output)
-- [일반적인 문제](#common-issues)
+- [지원되는 eBook 형식](#지원되는-eBook-형식)
+- [출력](#출력)
+- [일반적인 Issue 및 해결 방법](#일반적인-Issue-및-해결-방법)
 - [특별 감사](#special-thanks)
-- [서버 참여](#join-our--server)
+- [서버 참여](#우리와-함께하세요!)
 - [이전 버전](#legacy-v10)
-- [목차](#table-of-contents)
+- [목차](#목차)
 
 
 ## 기능
@@ -408,8 +408,8 @@ docker run --rm athomasson2/ebook2audiobook --help
 - Docker가 Fine-Tuned 모델 다운로드 중 멈춤
   <br>일부 시스템에서 발생하는 문제이며, 진행률 표시줄을 비활성화하면 해결될 수 있습니다.
   [GitHub Issue #191](https://github.com/DrewThomasson/ebook2audiobook/issues/191)에서 논의된 해결 방법을 참고하세요.
-  해결 방법:
-  Example of adding this fix in the `docker run` command
+  <br>해결 방법:
+  다음과 같이 환경 변수를 설정하여 진행률 표시줄을 비활성화하세요.
 ```Dockerfile
 docker run --rm --gpus all -e HF_HUB_DISABLE_PROGRESS_BARS=1 -e HF_HUB_ENABLE_HF_TRANSFER=0 \
     -p 7860:7860 athomasson2/ebook2audiobook
@@ -417,22 +417,22 @@ docker run --rm --gpus all -e HF_HUB_DISABLE_PROGRESS_BARS=1 -e HF_HUB_ENABLE_HF
 
 
 ## Fine-Tuned TTS 모델
-You can fine-tune your own xtts model easily with this repo
+자신만의 XTTS 모델을 쉽게 파인튜닝하려면 다음 repository를 사용하세요.
 [xtts-finetune-webui](https://github.com/daswer123/xtts-finetune-webui)
 
-If you want to rent a GPU easily you can also duplicate this huggingface
+GPU를 간편하게 대여하여 파인튜닝을 실행하려면 다음 Hugging Face Space를 복제하세요.
 [xtts-finetune-webui-space](https://huggingface.co/spaces/drewThomasson/xtts-finetune-webui-gpu)
 
-A space you can use to de-noise the training data easily also
+훈련 데이터를 쉽게 잡음 제거하려면 다음 Hugging Face Space를 사용하세요.
 [denoise-huggingface-space](https://huggingface.co/spaces/drewThomasson/DeepFilterNet2_no_limit)
 
-### Fine Tuned TTS Collection
-To find our collection of already fine-tuned TTS models,
-visit [this Hugging Face link](https://huggingface.co/drewThomasson/fineTunedTTSModels/tree/main)
-For an XTTS custom model a ref audio clip of the voice reference is mandatory:
+### Fine-Tuned TTS 모델 컬렉션
+이미 파인튜닝된 TTS 모델 컬렉션을 확인하려면 아래 링크를 방문하세요.
+[this Hugging Face link](https://huggingface.co/drewThomasson/fineTunedTTSModels/tree/main)
+XTTS 사용자 지정 모델을 사용하려면 반드시 음성 참조용 오디오 클립이 필요합니다.
 
 
-## Demos
+## 데모
 **Rainy day voice**
 https://github.com/user-attachments/assets/d25034d9-c77f-43a9-8f14-0d167172b080
 
@@ -441,47 +441,50 @@ https://github.com/user-attachments/assets/d25034d9-c77f-43a9-8f14-0d167172b080
 https://github.com/user-attachments/assets/0d437a41-0b0d-48ed-8c9b-02763d5e48ea
 
 
-## Supported eBook Formats
+## 지원되는 eBook 형식
 - `.epub`, `.pdf`, `.mobi`, `.txt`, `.html`, `.rtf`, `.chm`, `.lit`,
   `.pdb`, `.fb2`, `.odt`, `.cbr`, `.cbz`, `.prc`, `.lrf`, `.pml`,
   `.snb`, `.cbc`, `.rb`, `.tcr`
-- **Best results**: `.epub` or `.mobi` for automatic chapter detection
+- **최적의 결과**를 위해 자동 챕터 감지가 가능한 `.epub` 또는 `.mobi` 형식을 권장합니다.
 
 
-## Output
-- Creates a `['m4b', 'm4a', 'mp4', 'webm', 'mov', 'mp3', 'flac', 'wav', 'ogg', 'aac']` (set in ./lib/conf.py) file with metadata and chapters.
-- **Example**
-  ![Example](https://github.com/DrewThomasson/VoxNovel/blob/dc5197dff97252fa44c391dc0596902d71278a88/readme_files/example_in_app.jpeg)
+## 출력
+- `['m4b', 'm4a', 'mp4', 'webm', 'mov', 'mp3', 'flac', 'wav', 'ogg', 'aac']` 형식의 오디오 파일을 생성하며, 메타데이터와 챕터 정보가 포함됩니다.
+<br> (설정 파일: `./lib/conf.py`)
+- **예제 출력**
+  ![예제](https://github.com/DrewThomasson/VoxNovel/blob/dc5197dff97252fa44c391dc0596902d71278a88/readme_files/example_in_app.jpeg)
 
 
-## Common Issues:
--  CPU is slow (better on server smp CPU) while NVIDIA GPU can have almost real time conversion.
-   [Discussion about this](https://github.com/DrewThomasson/ebook2audiobook/discussions/19#discussioncomment-10879846)
-   For faster multilingual generation I would suggest my other
-   [project that uses piper-tts](https://github.com/DrewThomasson/ebook2audiobookpiper-tts) instead
-   (It doesn't have zero-shot voice cloning though, and is Siri quality voices, but it is much faster on cpu).
-- "I'm having dependency issues" - Just use the docker, its fully self contained and has a headless mode,
-   add `--help` parameter at the end of the docker run command for more information.
-- "Im getting a truncated audio issue!" - PLEASE MAKE AN ISSUE OF THIS,
-   we don't speak every language and need advise from users to fine tune the sentence splitting logic.😊
+## 일반적인 Issue 및 해결 방법:
+-  CPU 속도가 느림
+  - 서버용 SMP CPU에서는 더 나은 성능을 보이며, NVIDIA GPU를 사용하면 거의 실시간 변환이 가능합니다.
+  - 관련 논의: [여기에서 확인](https://github.com/DrewThomasson/ebook2audiobook/discussions/19#discussioncomment-10879846)
+  - 다국어 오디오를 더 빠르게 생성하려면 [piper-tts 기반 프로젝트](https://github.com/DrewThomasson/ebook2audiobookpiper-tts) 를 고려하세요.
+  (단, 제로샷 음성 복제는 지원하지 않으며, Siri 수준의 음질이지만 CPU에서 훨씬 빠르게 실행됩니다.)
+- "의존성 문제로 실행이 안 돼요!" 
+  - Docker를 사용하세요. Docker는 완전한 독립 실행 환경을 제공하며, 헤드리스 모드도 지원합니다.
+  - 더 많은 옵션을 보려면 Docker 실행 명령에 --help 파라미터를 추가하세요.
+- "출력된 오디오가 잘려요!" 
+  - 이 문제를 겪으셨다면 반드시 GitHub에 Issue를 올려 주세요!
+  - 모든 언어를 직접 테스트할 수 없기 때문에, 사용자 피드백을 통해 문장 분할 로직을 최적화할 필요가 있습니다. 😊
 
 
-## What I need help with! 🙌 
-## [Full list of things can be found here](https://github.com/DrewThomasson/ebook2audiobook/issues/32)
-- Any help from people speaking any of the supported languages to help with proper sentence splitting methods
-- Potentially creating readme Guides for Multiple languages(Becuase the only language I know is English 😔)
+## 도움이 필요해요! 🙌 
+## [전체 목록은 여기에서 확인하세요](https://github.com/DrewThomasson/ebook2audiobook/issues/32)
+- 지원되는 언어를 구사하는 분들의 도움을 받아, 올바른 문장 분할 방식을 개선하고 싶습니다.
+- 다양한 언어로 README 가이드를 작성해 주실 분이 필요합니다! (제가 아는 언어는 영어뿐이에요 😔)
 
 
 ## Special Thanks
 - **Coqui TTS**: [Coqui TTS GitHub](https://github.com/idiap/coqui-ai-TTS)
-- **Calibre**: [Calibre Website](https://calibre-ebook.com)
-- **FFmpeg**: [FFmpeg Website](https://ffmpeg.org)
-- [@shakenbake15 for better chapter saving method](https://github.com/DrewThomasson/ebook2audiobook/issues/8) 
+- **Calibre**: [Calibre 공식 웹사이트](https://calibre-ebook.com)
+- **FFmpeg**: [FFmpeg 공식 웹사이트](https://ffmpeg.org)
+- [@shakenbake15 - 더 나은 챕터 저장 방식 제안](https://github.com/DrewThomasson/ebook2audiobook/issues/8) 
 
 
 ### [Legacy V1.0](legacy/v1.0)
-You can view the code [here](legacy/v1.0).
+이전 버전의 코드는 [여기에서 확인](legacy/v1.0) 할 수 있습니다.
 
 
-## Join Our  Server!
+## 우리와 함께하세요!
 [![Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/63Tv3F65k6)](https://discord.gg/63Tv3F65k6)
