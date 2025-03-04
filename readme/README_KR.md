@@ -36,58 +36,58 @@ ebook2audiobook 개발을 지원해 주세요!<br>
 
 ## 목차
 - [ebook2audiobook](#-ebook2audiobook)
-- [기능](#features)
-- [Docker GUI 인터페이스](#docker-gui-interface)
-- [Huggingface Space 데모](#huggingface-space-demo)
-- [무료 Google Colab](#free-google-colab)
-- [Pre-made Audio Demos](#demos)
+- [기능](#기능)
+- [Docker GUI 인터페이스](#Docker-GUI-인터페이스)
+- [Huggingface Space 데모](#Huggingface-Space-데모)
+- [무료 Google Colab](#무료-Google-Colab)
+- [미리 제작된 오디오 데모](#demos)
 - [지원 언어](#supported-languages)
 - [시스템 요구 사항](#hardware-requirements)
 - [설치 방법](#installation-instructions)
 - [사용법](#launching-gradio-web-interface)
-  - [Launching Gradio Web Interface](#launching-gradio-web-interface)
-  - [Basic Headless Usage](#basic--usage)
+  - [Gradio 웹 인터페이스 실행](#launching-gradio-web-interface)
+  - [기본 Headless 사용법](#basic--usage)
   - [Headless Custom XTTS Model Usage](#example-of-custom-model-zip-upload)
-  - [Renting a GPU](#renting-a-gpu)
-  - [Help command output](#help-command-output)
-- [Fine Tuned TTS models](#fine-tuned-tts-models)
-  - [For Collection of Fine-Tuned TTS Models](#fine-tuned-tts-collection)
-- [Using Docker](#using-docker)
-  - [Docker Run](#running-the-docker-container)
-  - [Docker Build](#building-the-docker-container)
+  - [GPU 대여](#renting-a-gpu)
+  - [도움말 명령 출력](#help-command-output)
+- [Fine-Tuned TTS 모델](#fine-tuned-tts-models)
+  - [Fine-Tuned TTS 모델 모음](#fine-tuned-tts-collection)
+- [Docker 사용하기](#using-docker)
+  - [Docker 실행](#running-the-docker-container)
+  - [Docker 빌드](#building-the-docker-container)
   - [Docker Compose](#docker-compose)
-  - [Docker headless guide](#docker-headless-guide)
-  - [Docker container file locations](#docker-container-file-locations)
-  - [Common Docker issues](#common-docker-issues)
+  - [Headless Docker 가이드](#docker-headless-guide)
+  - [Docker 컨테이너 파일 위치](#docker-container-file-locations)
+  - [일반적인 Docker Issues 해결](#일반적인-Docker-Issues-해결)
 - [지원되는 eBook 형식](#supported-ebook-formats)
 - [출력](#output)
-- [Common Issues](#common-issues)
-- [Special Thanks](#special-thanks)
-- [Join Our Server!](#join-our--server)
-- [Legacy](#legacy-v10)
-- [Table of Contents](#table-of-contents)
+- [일반적인 문제](#common-issues)
+- [특별 감사](#special-thanks)
+- [서버 참여](#join-our--server)
+- [이전 버전](#legacy-v10)
+- [목차](#table-of-contents)
 
 
 ## 기능
-- 📖 Converts eBooks to text format with Calibre.
-- 📚 Splits eBook into chapters for organized audio.
-- 🎙️ High-quality text-to-speech with [Coqui XTTSv2](https://huggingface.co/coqui/XTTS-v2) and [Fairseq](https://github.com/facebookresearch/fairseq/tree/main/examples/mms) (and more).
-- 🗣️ Optional voice cloning with your own voice file.
-- 🌍 Supports +1110 languages (English by default). [List of Supported languages](https://dl.fbaipublicfiles.com/mms/tts/all-tts-languages.html)
-- 🖥️ Designed to run on 4GB RAM.
+- 📖 Calibre를 사용하여 eBook을 텍스트 형식으로 변환
+- 📚 챕터별로 eBook을 분할하여 체계적인 오디오 생성
+- 🎙️ [Coqui XTTSv2](https://huggingface.co/coqui/XTTS-v2) 및 [Fairseq](https://github.com/facebookresearch/fairseq/tree/main/examples/mms) 등 고품질 음성생성 엔진 지원
+- 🗣️ 사용자의 음성을 활용한 음성 복제 기능 제공
+- 🌍 1110개 이상의 언어 지원 (기본값: 영어) [지원 언어 목록](https://dl.fbaipublicfiles.com/mms/tts/all-tts-languages.html)
+- 🖥️ 4GB RAM에서도 실행 가능
 
 
-## [Huggingface space demo](https://huggingface.co/spaces/drewThomasson/ebook2audiobook)
+## [Huggingface space 데모](https://huggingface.co/spaces/drewThomasson/ebook2audiobook)
 [![Hugging Face](https://img.shields.io/badge/Hugging%20Face-Spaces-yellow?style=for-the-badge&logo=huggingface)](https://huggingface.co/spaces/drewThomasson/ebook2audiobook)
-- Huggingface space is running on free cpu tier so expect very slow or timeout lol, just do not give it giant files is all
-- Best to duplicate space or run locally.
+- 무료 CPU Tier에서 실행되므로 속도가 느리거나 시간 초과가 발생할 수 있으니, 너무 큰 파일은 피해주세요
+- 공간을 복제하거나 로컬에서 실행하는 것이 가장 좋습니다.
 
 
-## Free Google Colab 
+## 무료 Google Colab 
 [![Free Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/DrewThomasson/ebook2audiobook/blob/main/Notebooks/colab_ebook2audiobook.ipynb)
 
 
-## Supported Languages
+## 지원 언어
 | **Arabic (ar)**    | **Chinese (zh)**    | **English (en)**   | **Spanish (es)**   |
 |:------------------:|:------------------:|:------------------:|:------------------:|
 | **French (fr)**    | **German (de)**     | **Italian (it)**   | **Portuguese (pt)** |
@@ -96,33 +96,32 @@ ebook2audiobook 개발을 지원해 주세요!<br>
 | **Hungarian (hu)** | **Korean (ko)**     | **Vietnamese (vi)**| **Swedish (sv)**   |
 | **Persian (fa)**   | **Yoruba (yo)**     | **Swahili (sw)**   | **Indonesian (id)**|
 | **Slovak (sk)**    | **Croatian (hr)**   | **Tamil (ta)**     | **Danish (da)**    |
-- [**+1100 languages and dialects here**](https://dl.fbaipublicfiles.com/mms/tts/all-tts-languages.html)
+- [**+1100개 이상의 언어 및 방언 목록**](https://dl.fbaipublicfiles.com/mms/tts/all-tts-languages.html)
 
 
-##  Hardware Requirements
-- 4gb RAM minimum, 8GB recommended
-- Virtualization enabled if running on windows (Docker only)
-- CPU, GPU (Recommended), MPS (Not yt optimized and can be slower than CPU) compatible
-
+##  시스템 요구 사항
+- 최소 4GB RAM (권장: 8GB)
+- Windows에서 실행할 경우 가상화 활성화 필요 (Docker 전용)
+- CPU, GPU(권장), MPS(아직 최적화되지 않아 CPU보다 느릴 수 있음)와 호환됩니다.
 
 > [!IMPORTANT]
-**Before to post an install or bug issue search carefully to the opened and closed issues TAB<br>
-to be sure your issue does not exist already.**
+**설치 또는 버그 관련 문제를 게시하기 전에,<br>
+열린 이슈와 닫힌 이슈 탭을 신중하게 검색하여 이미 존재하는 문제인지 확인하세요.**
 
 
 >[!NOTE]
-**Lacking of any standards structure like what is a chapter, paragraph, preface etc.<br>
-you should first remove manually any text you don't want to be converted in audio.**
+**장(chapter), 단락(paragraph), 서문(preface) 등의 표준 구조가 없기 때문에,<br>
+오디오로 변환하고 싶지 않은 텍스트는 먼저 수동으로 제거해야 합니다.**
 
 
-### Installation Instructions
-1. **Clone repo**
+### 설치 방법
+1. **저장소 클론**
 ```bash
 git clone https://github.com/DrewThomasson/ebook2audiobook.git
 ```
 
-### Launching Gradio Web Interface
-1. **Run ebook2audiobook**:
+### Gradio 웹 인터페이스 실행
+1. **ebook2audiobook 실행하기**:
    - **Linux/MacOS**
      ```bash
      ./ebook2audiobook.sh  # Run Launch script
@@ -131,17 +130,17 @@ git clone https://github.com/DrewThomasson/ebook2audiobook.git
      ```bash
      .\ebook2audiobook.cmd  # Run launch script or double click on it (Bypass windows alerts)
      ```
-2. **Open the Web App**: Click the URL provided in the terminal to access the web app and convert eBooks.
-3. **For Public Link**:
+2. **웹 앱 열기**: 터미널에 제공된 URL을 클릭하여 웹 앱에 접속하고 eBook을 변환하세요
+3. **공개 링크 생성**:
    `python app.py --share` (all OS)
    `./ebook2audiobook.sh --share` (Linux/MacOS)
    `ebook2audiobook.cmd --share` (Windows)
 
 > [!IMPORTANT]
-**If the script is stopped and run again, you need to refresh your gradio GUI interface<br>
-to let the web page reconnect to the new connection socket.**
+**스크립트를 중지했다가 다시 실행하면, 웹 페이지가 새로운 연결 소켓에 접속할 수 있도록
+Gradio GUI 인터페이스를 새로고침해야 합니다.**
 
-### Basic  Usage
+### 기본 사용법
    - **Linux/MacOS**:
      ```bash
      ./ebook2audiobook.sh --headless --ebook <path_to_ebook_file> \
@@ -153,15 +152,15 @@ to let the web page reconnect to the new connection socket.**
          --voice [path_to_voice_file] --language [language_code]
      ```
      
-  - **[--ebook]**: Path to your eBook file
-  - **[--voice]**: Voice cloning file path (optional)
-  - **[--language]**: Language code in ISO-639-3 (i.e.: ita for italian, eng for english, deu for german...).<br>
-    Default language is eng and --language is optional for default language set in ./lib/lang.py.<br>
-    The ISO-639-1 2 letters codes are also supported.
+  - **[--ebook]**: eBook 파일 경로
+  - **[--voice]**: 음성 클로닝 파일 경로 (선택 사항)
+  - **[--language]**: ISO-639-3 언어 코드 (예: 이탈리아어 - ita, 영어 - eng, 독일어 - deu 등)<br>
+    기본 언어는 eng이며, --language 옵션을 생략하면 ./lib/lang.py에 설정된 기본 언어가 사용됩니다.<br>
+    또한, ISO-639-1 두 글자 코드도 지원됩니다.
 
 
-###  Example of Custom Model Zip Upload
-  (must be a .zip file containing the mandatory model files. Example for XTTS: config.json, model.pth, vocab.json and ref.wav)
+###  사용자 지정 모델 ZIP 업로드 예시
+  (필수 모델 파일이 포함된 .zip 파일이어야 합니다. XTTS의 예: config.json, model.pth, vocab.json, ref.wav)
    - **Linux/MacOS**
      ```bash
      ./ebook2audiobook.sh --headless --ebook <ebook_file_path> \
@@ -172,12 +171,12 @@ to let the web page reconnect to the new connection socket.**
      .\ebook2audiobook.cmd --headless --ebook <ebook_file_path> \
          --voice <target_voice_file_path> --language <language> --custom_model <custom_model_path>
      ```
-- **<custom_model_path>**: Path to `model_name.zip` file,
-      which must contain (according to the tts engine) all the mandatory files<br>
-      (see ./lib/models.py).
+- **<custom_model_path>**: `model_name.zip` 파일의 경로로,
+      TTS 엔진에 따라 필수 파일이 모두 포함되어 있어야 합니다.<br>
+      (자세한 내용은 ./lib/models.py 참고)
 
 
-### For Detailed Guide with list of all Parameters to use
+### 모든 매개변수 목록과 자세한 가이드를 보려면
    - **Linux/MacOS**
      ```bash
      ./ebook2audiobook.sh --help
@@ -280,15 +279,15 @@ Linux/Mac:
     ./ebook2audiobook.sh --headless --ebook '/path/to/file'
 ```
 
-NOTE: in gradio/gui mode, to cancel a running conversion, just click on the [X] from the ebook upload component.
+참고: Gradio/GUI 모드에서 실행 중인 변환을 취소하려면 eBook 업로드 구성 요소에서 [X] 버튼을 클릭하세요.
 
-### Using Docker
-You can also use Docker to run the eBook to Audiobook converter. 
-This method ensures consistency across different environments and simplifies setup.
+### Docker 사용하기
+Docker를 사용하여 eBook을 오디오북으로 변환할 수도 있습니다.
+이 방법은 다양한 환경에서 일관성을 유지하고 설정을 간소화하는 데 도움이 됩니다.
 
 
-#### Running the Docker Container
-To run the Docker container and start the Gradio interface, use the following command:
+#### Docker 컨테이너 실행
+Docker 컨테이너를 실행하고 Gradio 인터페이스를 시작하려면 다음 명령어를 사용하세요.
 
  -Run with CPU only
 ```powershell
@@ -300,33 +299,33 @@ docker run --rm --gpus all -p 7860:7860 athomasson2/ebook2audiobook
 ```
 
 
-#### Building the Docker Container
-- You can build the docker image with the command:
+#### Docker 컨테이너 빌드
+- 다음 명령어로 Docker 이미지를 빌드할 수 있습니다:
 ```powershell
 docker build --platform linux/amd64 -t athomasson2/ebook2audiobook .
 ```
-This command will start the Gradio interface on port 7860.(localhost:7860)
-- For more options add the parameter `--help`
+이 명령어를 실행하면 Gradio 인터페이스가 포트 7860(`localhost:7860`)에서 시작됩니다.
+- 추가 옵션을 확인하려면 `--help` 매개변수를 사용하세요.
 
 
-## Docker container file locations
-All ebook2audiobooks will have the base dir of `/home/user/app/`
+## Docker 컨테이너 파일 위치
+모든 eBook2Audiobook 파일의 기본 디렉터리는 `/home/user/app/`입니다.
 For example:
 `tmp` = `/home/user/app/tmp`
 `audiobooks` = `/home/user/app/audiobooks`
 
 
-## Docker headless guide
-first for a docker pull of the latest with
+## Headless Docker 가이드
+먼저, 최신 버전의 Docker 이미지를 가져오려면 다음 명령어를 실행하세요:
 ```bash 
 docker pull athomasson2/ebook2audiobook
 ```
-- Before you do run this you need to create a dir named "input-folder" in your current dir
-  which will be linked, This is where you can put your input files for the docker image to see
+- 실행하기 전에, 현재 디렉터리에 "input-folder"라는 폴더를 생성해야 합니다.
+이 폴더는 Docker 컨테이너와 연결되며, 변환할 입력 파일을 저장하는 위치입니다.
 ```bash
 mkdir input-folder && mkdir Audiobooks
 ```
-- In the command below swap out **YOUR_INPUT_FILE.TXT** with the name of your input file 
+아래 명령어에서 **YOUR_INPUT_FILE.TXT** 을 변환할 eBook 파일 이름으로 변경하세요.
 ```bash
 docker run --rm \
     -v $(pwd)/input-folder:/home/user/app/input_folder \
@@ -334,73 +333,83 @@ docker run --rm \
     athomasson2/ebook2audiobook \
     --headless --ebook /input_folder/YOUR_EBOOK_FILE
 ```
-- And that should be it! 
-- The output Audiobooks will be found in the Audiobook folder which will also be located
-  in your local dir you ran this docker command in
+- 이제 변환된 오디오북은 Audiobooks 폴더에 저장되며, 해당 폴더는 Docker 명령어를 실행한 로컬 디렉터리에 위치합니다.
 
 
-## To get the help command for the other parameters this program has you can run this 
-
+## 기타 매개변수 확인 방법
+이 프로그램에서 사용할 수 있는 다른 매개변수를 확인하려면 다음 명령어를 실행하세요:
 ```bash
 docker run --rm athomasson2/ebook2audiobook --help
 
 ```
-and that will output this 
-[Help command output](#help-command-output)
+이 명령어를 실행하면 다음과 같은 출력이 표시됩니다:
+[도움말 명령 출력](#help-command-output)
 
 
 ### Docker Compose
-This project uses Docker Compose to run locally. You can enable or disable GPU support 
-by setting either `*gpu-enabled` or `*gpu-disabled` in `docker-compose.yml`
+이 프로젝트는 Docker Compose를 사용하여 로컬에서 실행됩니다.
+`docker-compose.yml`에서 `*gpu-enabled` 또는 `*gpu-disabled`를 설정하여 GPU 지원을 활성화하거나 비활성화할 수 있습니다.
 
 
-#### Steps to Run
-1. **Clone the Repository** (if you haven't already):
+#### 실행 방법
+1. **Clone the Repository** (아직 하지 않았다면):
    ```bash
    git clone https://github.com/DrewThomasson/ebook2audiobook.git
    cd ebook2audiobook
    ```
-2. **Set GPU Support (disabled by default)**
-  To enable GPU support, modify `docker-compose.yml` and change `*gpu-disabled` to `*gpu-enabled`
-3. **Start the service:**
+2. **GPU 지원 설정 (기본적으로 비활성화됨)**
+  `docker-compose.yml`을 수정하여 `*gpu-disabled`를 `*gpu-enabled`로 변경하면 GPU 지원을 활성화할 수 있습니다.
+3. **서비스 접속:**
     ```bash
     docker-compose up -d
     ```
-4. **Access the service:**
-  The service will be available at http://localhost:7860.
+4. **서비스 접속:**
+  웹 인터페이스는 http://localhost:7860 에서 사용할 수 있습니다.
 
 
-### Docker GUI Interface
+### Docker GUI 인터페이스
 ![demo_web_gui](assets/demo_web_gui.gif)
 
 <details>
-  <summary>Click to see images of Web GUI</summary>
+  <summary>웹 GUI 이미지 보기를 클릭하세요.</summary>
   <img width="1728" alt="GUI Screen 1" src="assets/gui_1.png">
   <img width="1728" alt="GUI Screen 2" src="assets/gui_2.png">
   <img width="1728" alt="GUI Screen 3" src="assets/gui_3.png">
 </details>
 
 
-## Renting a GPU
-Don't have the hardware to run it or you want to rent a GPU?
-#### You can duplicate the hugginface space and rent a gpu for around $0.40 an hour
-[Huggingface Space Demo](#huggingface-space-demo)
+## GPU 대여
+직접 실행할 하드웨어가 없거나 GPU를 대여하고 싶다면?
+#### Hugging Face Space에서 GPU 대여 (시간당 약 $0.40)
+[Huggingface Space 데모](#Huggingface-Space-데모)
 
-#### Or you can try using the google colab for free!
-(Be aware it will time out after a bit of your not messing with the google colab)
-[Free Google Colab](#free-google-colab)
+#### 또는 무료 Google Colab 사용!
+(Google Colab은 일정 시간 동안 활동이 없으면 자동으로 세션이 종료될 수 있습니다.)
+[무료 Google Colab](#무료-Google-Colab)
 
 
-## Common Docker Issues
+## 일반적인 Docker Issues 해결
 
-- `python: can't open file '/home/user/app/app.py': [Errno 2] No such file or directory` (Just remove all post arguments as I replaced the `CMD` with `ENTRYPOINT` in the [Dockerfile](Dockerfile))
-  - Example: `docker run athomasson2/ebook2audiobook app.py --script_mode full_docker` - > corrected - > `docker run athomasson2/ebook2audiobook`
-  - Arguments can be easily added like this now `docker run athomasson2/ebook2audiobook --share`
+- `python: can't open file '/home/user/app/app.py': [Errno 2] No such file or directory` 
+해결 방법:
+추가 인수를 제거하세요. Dockerfile에서 `CMD`를 `ENTRYPOINT`로 변경했기 때문입니다.
+  - 예시 (잘못된 명령어):
+  ```bash
+  docker run athomasson2/ebook2audiobook app.py --script_mode full_docker
+  ```
+  수정된 명령어:
+  ```bash
+  `docker run athomasson2/ebook2audiobook`
+  ```
+  - 추가 인수는 다음과 같이 간단하게 추가할 수 있습니다:
+  ```bash
+  docker run athomasson2/ebook2audiobook --share
+  ```
 
-- Docker gets stuck downloading Fine-Tuned models.
-  (This does not happen for every computer but some appear to run into this issue)
-  Disabling the progress bar appears to fix the issue,
-  as discussed [here in #191](https://github.com/DrewThomasson/ebook2audiobook/issues/191)
+- Docker가 Fine-Tuned 모델 다운로드 중 멈춤
+  일부 시스템에서 발생하는 문제이며, 진행률 표시줄을 비활성화하면 해결될 수 있습니다.
+  [GitHub Issue #191](https://github.com/DrewThomasson/ebook2audiobook/issues/191)에서 논의된 해결 방법을 참고하세요.
+  해결 방법:
   Example of adding this fix in the `docker run` command
 ```Dockerfile
 docker run --rm --gpus all -e HF_HUB_DISABLE_PROGRESS_BARS=1 -e HF_HUB_ENABLE_HF_TRANSFER=0 \
@@ -408,7 +417,7 @@ docker run --rm --gpus all -e HF_HUB_DISABLE_PROGRESS_BARS=1 -e HF_HUB_ENABLE_HF
 ```
 
 
-## Fine Tuned TTS models
+## Fine-Tuned TTS 모델
 You can fine-tune your own xtts model easily with this repo
 [xtts-finetune-webui](https://github.com/daswer123/xtts-finetune-webui)
 
